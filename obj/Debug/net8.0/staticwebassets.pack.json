@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Programacion web, trabajos\\PrimerParcial\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\PrimerParcial.bundle.scp.css",
+      "PackagePath": "staticwebassets\\PrimerParcial.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Programacion web, trabajos\\PrimerParcial\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Programacion web, trabajos\\PrimerParcial\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Programacion web, trabajos\\PrimerParcial\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Programacion web, trabajos\\PrimerParcial\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.PrimerParcial.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.PrimerParcial.props",
+      "PackagePath": "build\\PrimerParcial.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.PrimerParcial.props",
+      "PackagePath": "buildMultiTargeting\\PrimerParcial.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.PrimerParcial.props",
+      "PackagePath": "buildTransitive\\PrimerParcial.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

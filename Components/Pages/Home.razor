@@ -1,0 +1,69 @@
+﻿@page "/"
+@rendermode InteractiveServer
+@inject NavigationManager NavMan
+@inject IJSRuntime Jsx
+@using System.Text.Json;
+
+<PageTitle>Home</PageTitle>
+
+
+<h3>Historial de Tardanza</h3>
+
+<div class="text-end mb-3">
+     <button ><a class="nav-link" href="/CrearRegistro/GuardarReporte" target="_self">Nuevo Reporte</a>
+        </button>
+    
+    </div>
+
+<table class = "table">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Matricula</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Curso</th>
+            <th>Motivo</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var Registro in Reportes)
+        {<tr>
+            <td>@Registro.Fecha</td>
+            <td>@Registro.Matricula</td>
+            <td>@Registro.Nombre</td>
+            <td>@Registro.Apellido</td>
+            <td>@Registro.Curso</td>
+            <td>@Registro.Motivo</td>
+            
+        </tr>
+        }
+    </tbody>
+    
+</table>
+
+@code{
+    
+    List<Reporte> Reportes = new List<Reporte>();
+
+    protected override async Task OnAfterRenderAsync (bool firstRender)
+    {
+        if (firstRender)
+    { 
+        var RegistroJson = await Jsx.InvokeAsync<string> ("LocalStorage.getItem", "Reportes");
+
+    
+        if(RegistroJson != null){
+        Reportes = JsonSerializer.Deserialize<List<Reporte>>(RegistroJson);
+
+        }
+        StateHasChanged();
+    }
+
+    }
+
+
+
+
+}

@@ -1,0 +1,96 @@
+@page "/CrearRegistro/GuardarReporte"
+@rendermode InteractiveServer
+@inject NavigationManager NavMan
+@inject IJSRuntime Jsx
+@using System.Text.Json
+
+<h3>Nuevo Registro</h3>
+
+<EditForm Model="@Registro" OnValidSubmit="GuardarReporte">
+    <DataAnnotationsValidator />
+
+    <div>
+        <label for ="Fecha" class="form-label">Fecha: (Campo Obligatorio)</label>
+        <InputDate id="Fecha" @bind-Value="Registro.Fecha" class="form-control"/>
+    </div>
+
+    <div>
+        <label for ="Matricula" class="form-label">Matricula: (Campo Obligatorio)</label>
+        <InputTextArea id="Matricula" @bind-Value="Registro.Matricula" class="form-control"/>
+    </div>
+
+    <div>
+        <label for ="Nombre" class="form-label">Nombre: (Campo Obligatorio)</label>
+        <InputTextArea id="Nombre" @bind-Value="Registro.Nombre" class="form-control"/>
+    </div>
+
+        <div>
+        <label for ="Apellido" class="form-label">Apellido: (Campo Obligatorio)</label>
+        <InputTextArea id="Apellido" @bind-Value="Registro.Apellido" class="form-control"/>
+    </div>
+
+    <div>
+        <label for ="Curso" class="form-label">Curso: (Campo Obligatorio)</label>
+        <InputTextArea id="Curso" @bind-Value="Registro.Curso" class="form-control"/>
+    </div>
+
+    <div>
+        <label for ="Motivo" class="form-label">Motivo: (Campo Obligatorio)</label>
+        <InputTextArea id="Motivo" @bind-Value="Registro.Motivo" class="form-control"/>
+    </div>
+    
+    <div class="mt-3">
+        <button type="submit" class ="btn btn-succes" >Guardar</button>
+        <button ><a class="nav-link" href="/" target="_self">Cancelar<i class="fa-solid fa-house"></i></a>
+        </button>
+    
+    </div>
+       
+</EditForm>
+
+ 
+@code{
+
+    //Emmanuel Perez Ramirez  Mat: 2023-1003
+
+    List <Reporte> Reportes = new List<Reporte>();
+    private string id {get; set;} ="";
+
+    private Reporte Registro = new Reporte();
+
+    public void GuardarReporte(){
+        if(string.IsNullOrEmpty(Registro.Id))
+        {
+            Reportes.Add(Registro);
+            Registro.Id = Guid.NewGuid().ToString();
+        }
+        else
+        {var index = Reportes.FindIndex(x => x.Id == Registro.Id);
+        Reportes[index] = Registro;
+        }
+        Jsx.InvokeVoidAsync("localStorage.setItem" ,"Reportes", JsonSerializer.Serialize(Reportes));
+       NavMan.NavigateTo("/");
+    }
+
+    
+
+    protected override async Task OnAfterRenderAsync (bool firstRender)
+    {
+        if (firstRender)
+    { 
+        var RegistroJson = await Jsx.InvokeAsync<string> ("localStorage.getItem", "Reportes");
+
+        if (RegistroJson != null){
+                 Reportes = JsonSerializer.Deserialize<List<Reporte>> (RegistroJson);
+    
+        if(id != null){
+            Registro = Reportes.FirstOrDefault(r=> r.Id == id)?? new Reporte();
+        }
+        StateHasChanged();
+        }
+       
+    }
+
+    }
+
+}
